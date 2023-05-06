@@ -22,8 +22,6 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.hotswap.agent.logging.AgentLogger;
-
 /**
  * Stores a GeneratorStrategy instance along with the parameter used to generate
  * with it
@@ -34,8 +32,6 @@ import org.hotswap.agent.logging.AgentLogger;
 public class GeneratorParametersRecorder {
     // this Map is used in the App ClassLoader
     public static ConcurrentHashMap<String, GeneratorParams> generatorParams = new ConcurrentHashMap<>();
-    private static AgentLogger LOGGER = AgentLogger
-            .getLogger(GeneratorParametersRecorder.class);
 
     /**
      *
@@ -52,9 +48,6 @@ public class GeneratorParametersRecorder {
             generatorParams.putIfAbsent(getClassName(bytes),
                     new GeneratorParams(generatorStrategy, classGenerator));
         } catch (Exception e) {
-            LOGGER.error(
-                    "Error saving parameters of a creation of a Cglib proxy",
-                    e);
         }
     }
 
